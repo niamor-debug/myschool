@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="MySchool — ton tableau de bord scolaire">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <title>MySchool</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">M</span><span>MySchool</span></div>
+      <nav>
+        <a class="nav-link active" href="#dashboard">▦ <span>Vue d'ensemble</span></a>
+        <a class="nav-link" href="#subjects">▤ <span>Mes matières</span></a>
+        <a class="nav-link" href="#notifications">♧ <span>Notifications</span></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sync-card">
+          <span class="status-dot"></span>
+          <div><strong>Mode aperçu</strong><small>École Directe non connecté</small></div>
+        </div>
+        <small class="muted">MySchool · Version 0.1</small>
+      </div>
+    </aside>
+
+    <main class="main" id="dashboard">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">TON ESPACE SCOLAIRE</p>
+          <h1>Vue d'ensemble</h1>
+        </div>
+        <button class="icon-button" id="enable-notifications" title="Activer les notifications" aria-label="Activer les notifications">♧</button>
+      </header>
+
+      <section class="welcome">
+        <div>
+          <p class="eyebrow">BIENVENUE SUR</p>
+          <h2>Garde le cap.<br><span>Progresse à ton rythme.</span></h2>
+          <p class="muted">Toutes tes notes et tes objectifs au même endroit.</p>
+        </div>
+        <div class="orb" aria-hidden="true"><span>MS</span></div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card highlight">
+          <p class="stat-label">Moyenne générale</p>
+          <div class="stat-value" id="overall-average">—<small>/20</small></div>
+          <p class="stat-foot">Calculée avec les matières renseignées</p>
+        </article>
+        <article class="stat-card">
+          <p class="stat-label">Matières suivies</p>
+          <div class="stat-value" id="subject-count">3</div>
+          <p class="stat-foot">Dans ton tableau de bord</p>
+        </article>
+        <article class="stat-card">
+          <p class="stat-label">Notes enregistrées</p>
+          <div class="stat-value" id="grade-count">5</div>
+          <p class="stat-foot">Exemples modifiables</p>
+        </article>
+      </section>
+
+      <section class="section-head" id="subjects">
+        <div><p class="eyebrow">SUIVI SCOLAIRE</p><h2>Mes matières</h2></div>
+        <button class="primary-button" id="add-grade">＋ Ajouter une note</button>
+      </section>
+      <section class="subjects-grid" id="subjects-list"></section>
+
+      <section class="bottom-grid">
+        <article class="panel" id="notifications">
+          <div class="panel-heading"><div><p class="eyebrow">RESTE INFORMÉ</p><h2>Notifications</h2></div><span class="pill">À chaque note</span></div>
+          <p class="muted">Active les notifications sur ton appareil. Dans cette version d'aperçu, les alertes de démonstration fonctionnent lorsque tu ajoutes une note depuis l'application.</p>
+          <button class="secondary-button" id="enable-notifications-2">Activer les notifications</button>
+          <p class="tiny muted" id="notification-status">Notifications non activées.</p>
+        </article>
+        <article class="panel">
+          <p class="eyebrow">PROCHAINE ÉTAPE</p>
+          <h2>Connexion École Directe</h2>
+          <p class="muted">La synchronisation automatique sera ajoutée après mise en place d'un serveur sécurisé. Ne saisis pas ton mot de passe dans cette maquette.</p>
+          <div class="connection-state"><span class="status-dot"></span> En attente de configuration</div>
+        </article>
+      </section>
+      <footer>MySchool <span>•</span> Tes données de démonstration restent sur cet appareil.</footer>
+    </main>
+  </div>
+
+  <dialog id="grade-dialog">
+    <form method="dialog" id="grade-form">
+      <div class="dialog-head"><div><p class="eyebrow">NOUVELLE ÉVALUATION</p><h2>Ajouter une note</h2></div><button class="close-button" value="cancel" aria-label="Fermer">×</button></div>
+      <label>Matière<select id="grade-subject"><option>Mathématiques</option><option>Physique-chimie</option><option>SVT</option><option>Français</option><option>Anglais</option><option>Histoire-géo</option><option>Autre</option></select></label>
+      <div class="form-row">
+        <label>Note obtenue<input id="grade-value" type="number" min="0" max="20" step="0.25" placeholder="Ex. 14" required></label>
+        <label>Sur<input id="grade-out-of" type="number" min="1" max="100" step="1" value="20" required></label>
+      </div>
+      <label>Coefficient<input id="grade-coef" type="number" min="0.1" max="20" step="0.1" value="1" required></label>
+      <label>Intitulé (facultatif)<input id="grade-label" type="text" maxlength="60" placeholder="Ex. Contrôle chapitre 3"></label>
+      <p class="tiny muted">Les notes sont ramenées sur 20 pour calculer la moyenne.</p>
+      <div class="dialog-actions"><button class="secondary-button" value="cancel">Annuler</button><button class="primary-button" id="save-grade" value="default">Enregistrer</button></div>
+    </form>
+  </dialog>
+  <script src="app.js"></script>
+</body>
+</html>
